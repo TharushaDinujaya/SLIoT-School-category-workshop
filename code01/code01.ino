@@ -5,9 +5,9 @@
 #define DHTPIN 4
 #define DHTTYPE DHT11
 
-const char* ssid = "YOUR_WIFI";
-const char* password = "YOUR_PASSWORD";
-const char* mqtt_server = "test.mosquitto.org";   // Your Mosquitto IP
+const char* ssid = "Galaxy";
+const char* password = "Hello2025";
+const char* mqtt_server = "test.mosquitto.org";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -30,7 +30,7 @@ void setup() {
 
 void reconnect() {
   while (!client.connected()) {
-    if (client.connect("ESP32Client")) {
+    if (client.connect("ESP32_DHT11_Client")) {
       Serial.println("Connected to MQTT");
     } else {
       delay(2000);
@@ -48,9 +48,11 @@ void loop() {
   float temperature = dht.readTemperature();
 
   if (!isnan(temperature)) {
+
     char tempString[8];
-    dtostrf(temperature, 1, 2, tempString);
-    client.publish("home/temperature", tempString);
+    dtostrf(temperature, 1, 2, tempString);  // convert float to string
+
+    client.publish("sliot/topic01", tempString);
     Serial.println(tempString);
   }
 

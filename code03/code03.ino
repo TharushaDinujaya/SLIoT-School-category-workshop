@@ -37,7 +37,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
     // Publish updated state to Node-RED
     String stateMessage = (currentLEDState == HIGH) ? "ON" : "OFF";
-    client.publish("tharusha/led/state", stateMessage.c_str());
+    client.publish("sliot/led/state", stateMessage.c_str());
     Serial.print("Published LED state: ");
     Serial.println(stateMessage);
   }
@@ -47,7 +47,7 @@ void reconnect() {
   while (!client.connected()) {
     Serial.println("Connecting to MQTT...");
     if (client.connect("ESP32_LED_Client")) {
-      client.subscribe("tharusha/led/control");
+      client.subscribe("sliot/led/control");
       Serial.println("Connected & Subscribed");
     } else {
       delay(2000);

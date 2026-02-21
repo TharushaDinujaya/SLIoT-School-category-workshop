@@ -5,8 +5,8 @@
 #define DHTPIN 4
 #define DHTTYPE DHT11
 
-const char* ssid = "YOUR_WIFI";
-const char* password = "YOUR_PASSWORD";
+const char* ssid = "Galaxy";
+const char* password = "Hello2025";
 const char* mqtt_server = "test.mosquitto.org";
 
 WiFiClient espClient;
@@ -58,7 +58,7 @@ void loop() {
     payload += humidity;
     payload += "}";
 
-    client.publish("tharusha/dht11", payload.c_str());
+    client.publish("sliot/topic02", payload.c_str());
     Serial.println(payload);
   }
 
